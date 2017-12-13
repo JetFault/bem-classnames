@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in classNames. Issues, PRs and suggestions welcome :)
+Thanks for your interest in bem-classNames. Issues, PRs and suggestions welcome :)
 
 Before working on a PR, please consider the following:
 

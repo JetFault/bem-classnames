@@ -1,7 +1,8 @@
 /* global describe, it */
 
 var assert = require('assert');
-var classNames = require('../');
+var bemClassNames = require('../');
+var classNames = bemClassNames('b');
 
 describe('classNames', function () {
 	it('keeps object keys with truthy values', function () {
@@ -11,16 +12,17 @@ describe('classNames', function () {
 			c: 0,
 			d: null,
 			e: undefined,
-			f: 1
-		}), 'a f');
+			f: 1,
+			'__g': 1,
+		}), 'a f b__g');
 	});
 
 	it('joins arrays of class names and ignore falsy values', function () {
-		assert.equal(classNames('a', 0, null, undefined, true, 1, 'b'), 'a 1 b');
+		assert.equal(classNames('a', 0, null, undefined, true, 1, 'b', '--c'), 'a 1 b b--c');
 	});
 
 	it('supports heterogenous arguments', function () {
-		assert.equal(classNames({a: true}, 'b', 0), 'a b');
+		assert.equal(classNames({a: true}, 'b', 0, '__a'), 'a b b__a');
 	});
 
 	it('should be trimmed', function () {
@@ -89,5 +91,15 @@ describe('classNames', function () {
 			nonEmptyList: [1, 2, 3],
 			greaterZero: 1
 		}), 'nonEmptyString whitespace function emptyObject nonEmptyObject emptyList nonEmptyList greaterZero');
+	});
+
+	it('can support custom prefix regexs', function () {
+		var cx = bemClassNames('b', /^3/);
+		assert.equal(cx('b', '3a', '__b'), 'b b3a __b');
+	});
+
+	it('can support no prefix', function () {
+		var cx = bemClassNames();
+		assert.equal(cx('b', '3a', '__b'), 'b 3a __b');
 	});
 });

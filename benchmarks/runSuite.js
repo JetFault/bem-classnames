@@ -4,11 +4,11 @@ function runSuite (local, npm, dedupe, npmDedupe, fixture, log) {
 	var suite = new benchmark.Suite();
 
 	suite.add('local#' + fixture.description, function () {
-		local.apply(null, fixture.args);
+		local('b').apply(null, fixture.args);
 	});
 
 	suite.add('  npm#' + fixture.description, function () {
-		npm.apply(null, fixture.args);
+		npm('b').apply(null, fixture.args);
 	});
 
 	suite.add('local/dedupe#' + fixture.description, function () {

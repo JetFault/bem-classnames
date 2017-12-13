@@ -1,64 +1,73 @@
-Classnames
+BEM-Classnames
 ===========
 
 [![Version](http://img.shields.io/npm/v/classnames.svg)](https://www.npmjs.org/package/classnames)
 [![Build Status](https://travis-ci.org/JedWatson/classnames.svg?branch=master)](https://travis-ci.org/JedWatson/classnames)
 [![Supported by Thinkmill](https://thinkmill.github.io/badge/heart.svg)](http://thinkmill.com.au/?utm_source=github&utm_medium=badge&utm_campaign=classnames)
 
+This is a fork JetWatson/classnames to add BEM support for classnames.
+
 A simple JavaScript utility for conditionally joining classNames together.
 
-Install with [npm](https://www.npmjs.com/), [Bower](https://bower.io/), or [Yarn](https://yarnpkg.com/):
+Install with [npm](https://www.npmjs.com/), or [Yarn](https://yarnpkg.com/):
 
 npm:
 ```sh
-npm install classnames --save
-```
-
-Bower:
-```sh
-bower install classnames --save
+npm install bem-classnames --save
 ```
 
 Yarn (note that `yarn add` automatically saves the package to the `dependencies` in `package.json`):
 ```sh
-yarn add classnames
+yarn add bem-classnames
 ```
 
 Use with [Node.js](https://nodejs.org/en/), [Browserify](http://browserify.org/), or [webpack](https://webpack.github.io/):
 
 ```js
-var classNames = require('classnames');
-classNames('foo', 'bar'); // => 'foo bar'
+var classNames = require('bem-classnames');
+classNames('block')('__foo', 'bar'); // => 'block__foo bar'
 ```
 
-Alternatively, you can simply include `index.js` on your page with a standalone `<script>` tag and it will export a global `classNames` method, or define the module if you are using RequireJS.
+Alternatively, you can simply include `index.js` on your page with a standalone `<script>` tag and it will export a global `bemClassNames` method, or define the module (`bem-classnames`) if you are using RequireJS.
 
 ### Project philosophy
 
 We take the stability and performance of this package seriously, because it is run millions of times a day in browsers all around the world. Updates are thoroughly reviewed for performance impacts before being released, and we have a comprehensive test suite.
 
-Classnames follows the [SemVer](http://semver.org/) standard for versioning.
+BEM-Classnames follows the [SemVer](http://semver.org/) standard for versioning.
 
 There is also a [Changelog](https://github.com/JedWatson/classnames/blob/master/HISTORY.md).
 
 ## Usage
 
-The `classNames` function takes any number of arguments which can be a string or object.
+The `bemClassNames` function takes a string prefix and an optional custom regex, it returns a function that takes any number of arguments which can be a string or object.
 The argument `'foo'` is short for `{ foo: true }`. If the value associated with a given key is falsy, that key won't be included in the output.
 
+To create a bem-prefixed classnames:
 ```js
+var cx = bemClassNames('block-name');
+cx('__element', 'other-block'); // 'block-name__element other-block'
+```
+
+To use a custom prefix regex:
+```js
+var cx = bemClassNames('block', /^3/)
+cx('3element', '_element'); // 'blockelement _element'
+
+```js
+var classNames = bemClassNames('button');
 classNames('foo', 'bar'); // => 'foo bar'
-classNames('foo', { bar: true }); // => 'foo bar'
-classNames({ 'foo-bar': true }); // => 'foo-bar'
+classNames('foo', { '__bar': true }); // => 'foo button__bar'
+classNames({ '--foo-bar': true }); // => 'button--foo-bar'
 classNames({ 'foo-bar': false }); // => ''
-classNames({ foo: true }, { bar: true }); // => 'foo bar'
+classNames({ '__element--modifier': true }, { bar: true }); // => 'button__element--modifier bar'
 classNames({ foo: true, bar: true }); // => 'foo bar'
 
 // lots of arguments of various types
 classNames('foo', { bar: true, duck: false }, 'baz', { quux: true }); // => 'foo bar baz quux'
 
 // other falsy values are just ignored
-classNames(null, false, 'bar', undefined, 0, 1, { baz: null }, ''); // => 'bar 1'
+classNames(null, false, '__bar', undefined, 0, 1, { baz: null }, ''); // => 'button__bar 1'
 ```
 
 Arrays will be recursively flattened as per the rules above:
