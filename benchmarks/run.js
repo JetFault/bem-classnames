@@ -8,11 +8,11 @@ function log (message) {
 }
 
 try {
-	var npm = require('classnames');
-	var npmDedupe = require('classnames/dedupe');
-	var npmPackage = require('./node_modules/classnames/package.json');
+	var npm = require('classnames-prefix');
+	var npmDedupe = require('classnames-prefix/dedupe');
+	var npmPackage = require('./node_modules/classnames-prefix/package.json');
 } catch (e) {
-	log('There was an error loading the benchmark classnames package.\n' +
+	log('There was an error loading the benchmark classnames-prefix package.\n' +
 		'Please make sure you have run `npm install` in ./benchmarks\n');
 	process.exit(0);
 }

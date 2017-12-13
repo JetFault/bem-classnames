@@ -1,16 +1,16 @@
 {
-  "name": "classnames-benchmarks",
+  "name": "classnames-prefix-benchmarks",
   "version": "1.0.0",
   "private": true,
   "description": "",
   "main": "run.js",
   "scripts": {
-    "test": "echo \"Tests should be run in the main classnames package.\" && exit 1"
+    "test": "echo \"Tests should be run in the main classnames-prefix package.\" && exit 1"
   },
   "author": "Jed Watson",
   "license": "MIT",
   "devDependencies": {
     "benchmark": "^1.0.0",
-    "bem-classnames": "*"
+    "classnames-prefix": "*"
   }
 }

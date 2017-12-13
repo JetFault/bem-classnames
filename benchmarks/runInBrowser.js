@@ -3,9 +3,9 @@ var local = require('../');
 var dedupe = require('../dedupe');
 var localPackage = require('../package.json');
 
-var npm = require('classnames');
-var npmDedupe = require('classnames/dedupe');
-var npmPackage = require('./node_modules/classnames/package.json');
+var npm = require('classnames-prefix');
+var npmDedupe = require('classnames-prefix/dedupe');
+var npmPackage = require('./node_modules/classnames-prefix/package.json');
 
 function log (message) {
 	console.log(message);
