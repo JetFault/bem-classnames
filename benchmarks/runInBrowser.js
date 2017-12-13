@@ -1,10 +1,8 @@
 var fixtures = require('./fixtures');
 var local = require('../');
-var dedupe = require('../dedupe');
 var localPackage = require('../package.json');
 
 var npm = require('classnames-prefix');
-var npmDedupe = require('classnames-prefix/dedupe');
 var npmPackage = require('./node_modules/classnames-prefix/package.json');
 
 function log (message) {
@@ -41,7 +39,7 @@ window.onload = function () {
 	log(navigator.userAgent);
 	setTimeout(function () {
 		deferredForEach(fixtures, function (f) {
-			runSuite(local, npm, dedupe, npmDedupe, f, log);
+			runSuite(local, npm, f, log);
 		}, function () {
 			log('Finished');
 			document.getElementById('loader').style.display = 'none';

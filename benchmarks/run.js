@@ -1,6 +1,5 @@
 var fixtures = require('./fixtures');
 var local = require('../');
-var dedupe = require('../dedupe');
 var localPackage = require('../package.json');
 
 function log (message) {
@@ -9,7 +8,6 @@ function log (message) {
 
 try {
 	var npm = require('classnames-prefix');
-	var npmDedupe = require('classnames-prefix/dedupe');
 	var npmPackage = require('./node_modules/classnames-prefix/package.json');
 } catch (e) {
 	log('There was an error loading the benchmark classnames-prefix package.\n' +
@@ -28,6 +26,6 @@ var runChecks = require('./runChecks');
 var runSuite = require('./runSuite');
 
 fixtures.forEach(function (f) {
-	runChecks(local, npm, dedupe, npmDedupe, f);
-	runSuite(local, npm, dedupe, npmDedupe, f, log);
+	runChecks(local, npm, f);
+	runSuite(local, npm, f, log);
 });
