@@ -1,6 +1,6 @@
 {
   "name": "classnames-prefix",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "BEM sugar ontop of `JetWatson/classnames`. Simple prefixer for classnames. A simple utility for conditionally joining classNames together",
   "main": "index.js",
   "types": "index.d.ts",
