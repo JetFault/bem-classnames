@@ -9,7 +9,7 @@
 	'use strict';
 
 	var hasOwn = {}.hasOwnProperty;
-	var bemPrefixRegex= /^--|__/;
+	var bemPrefixRegex= /^(--|__)/;
 
 	function bemClassNames (prefix, prefixRegex) {
 		var regex = prefixRegex;
